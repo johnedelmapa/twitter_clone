@@ -1,0 +1,20 @@
+<div class="media mb-3">
+    <%= gravatar_for(micropost.user, "profile-medium") %>
+    <div class="media-body ml-3">
+        <h5><%= link_to micropost.user.name, micropost.user, class: "text-decoration-none"%></h5>
+        <%= micropost.content %>
+        <% if micropost.picture? %>
+            <div>
+                <%= image_tag micropost.picture.url, class: "mw-100" %>
+            </div>
+        <% end %>
+        <div>
+            <small class="text-muted">Posted <%= time_ago_in_words(micropost.created_at) %> ago </small> 
+        </div>
+    </div>
+    <% if micropost.user == current_user %>
+        <%= link_to "Remove", micropost, method: :delete,
+                                          data: { confirm: "Are you sure?"},
+                                          class: "float-right" %>
+    <% end %>
+</div>

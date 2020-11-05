@@ -1,0 +1,23 @@
+<h1 class="text-center m-4">All Users</h1>
+<div class="row">
+    <% @users.each do |user| %>
+        <div class="col-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2">
+                            <%= gravatar_for(user, "profile-medium")%>
+                        </div>
+                        <div class="col-10">
+                            <h6><%= link_to user.name, user, class:"text-decoration-none"%></h6>
+                            <span><%= user.email %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="pagination justify-content-center mt-4">
+    <%= will_paginate @users %>
+</div>

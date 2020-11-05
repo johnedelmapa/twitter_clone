@@ -1,0 +1,49 @@
+<div class="row mt-4">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                User Information
+            </div>
+            <div class="card-body text-center">
+                <%= gravatar_for(@user, "profile-medium")%>
+                <h5 class="mt-2"><%= @user.name %></h5>
+                <p><%= @user.email %></p>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <strong><%= @user.following.count %></strong>
+                        following
+                    </div>
+
+                    <div class="col-6">
+                        <strong><%= @user.followers.count %></strong>
+                        followers
+                    </div>
+                </div>
+                <%= render "follow_form" %>
+            </div>
+            <% if current_user == @user %>
+                <div class="card-footer">
+                    <%= render "microposts/form" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                Activity Feed
+            </div>
+            <div class="card-body">
+                <% if @microposts.any? %>
+                    <%= render @microposts %>
+                    <div class="pagination justify-content-center mt-4">
+                        <%= will_paginate @microposts %>
+                    </div>
+                    <% else %>
+                    <h4 class="text-center">There's no microposts.</h4>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
